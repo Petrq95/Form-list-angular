@@ -1,0 +1,12 @@
+mat-list{
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
+    min-width: 280px;
+}
+mat-icon{
+    float: left;
+}
+.remove-button{
+    float: right;
+}

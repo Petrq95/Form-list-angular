@@ -1,0 +1,19 @@
+<form class="form-group">
+  <mat-form-field>
+    <input matInput placeholder="Your Name" id="name" name="name" class="form-control"
+      required minlength="4" appForbiddenName="bob">
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput placeholder="Enter your email" FormControl ="email" patern="^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$;" required>
+  </mat-form-field>
+  <mat-form-field class="example-full-width">
+    <span matPrefix>&nbsp;</span>
+    <input type="tel" matInput placeholder="Enter your phone number +380XXXXXXXXX" required pattern="^\+380\d{9}$">
+    <mat-icon matSuffix>phone</mat-icon>
+  </mat-form-field>
+    
+  <mat-form-field>
+    <textarea matInput placeholder="Your message"></textarea>
+  </mat-form-field>
+  <button mat-raised-button color="primary">Send</button>
+</form>
