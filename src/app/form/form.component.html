@@ -1,19 +1,30 @@
-<form class="form-group">
-  <mat-form-field>
-    <input matInput placeholder="Your Name" id="name" name="name" class="form-control"
-      required minlength="4" appForbiddenName="bob">
+<form [formGroup]="registerForm"  class="my_form" (ngSubmit)="onSubmit()">
+  <mat-form-field class="form-group">
+    <input matInput placeholder="Your Name" formControlName="userName" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.userName.errors }">
+    <div *ngIf="submitted && f.userName.errors" class="invalid-feedback">
+      <div *ngIf="f.usertName.errors.required">Name is required</div>
+      <div *ngIf="f.usertName.errors.minLength">Min 4 charters</div>
+    </div>
   </mat-form-field>
-  <mat-form-field>
-    <input matInput placeholder="Enter your email" FormControl ="email" patern="^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$;" required>
+  <mat-form-field class="form-group">
+    <input matInput placeholder="Enter your email" formControlName="email" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.email.errors }">
+    <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+      <div *ngIf="f.email.errors.required">Email is required</div>
+      <div *ngIf="f.email.errors.email">Email must be a valid email address</div>
+    </div>
   </mat-form-field>
-  <mat-form-field class="example-full-width">
+  <mat-form-field class="form-group">
     <span matPrefix>&nbsp;</span>
-    <input type="tel" matInput placeholder="Enter your phone number +380XXXXXXXXX" required pattern="^\+380\d{9}$">
+    <input type="tel" matInput placeholder="Enter your phone number +380XXXXXXXXX" formControlName="phone" [ngClass]="{ 'is-invalid': submitted && f.phone.errors }">
+      <div *ngIf="submitted && f.phone.errors" class="invalid-feedback">
+        <div *ngIf="f.phone.errors.required">Phone is required</div>
+        <div *ngIf="f.phone.errors.pattern">phone number should look like this +380XXXXXXXXX</div>
+      </div>
     <mat-icon matSuffix>phone</mat-icon>
   </mat-form-field>
-    
+
   <mat-form-field>
-    <textarea matInput placeholder="Your message"></textarea>
+    <textarea matInput placeholder ="Your message" ></textarea>
   </mat-form-field>
-  <button mat-raised-button color="primary">Send</button>
+    <button mat-raised-button [disabled]="registerForm.invalid" color="primary">Send</button>
 </form>

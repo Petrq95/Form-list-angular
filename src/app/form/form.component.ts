@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-form',
@@ -7,17 +7,30 @@ import { FormControl, Validators } from '@angular/forms';
   styleUrls: ['./form.component.css']
 })
 export class FormComponent implements OnInit {
-  email = new FormControl('', [Validators.required, Validators.email]);
+  registerForm: FormGroup;
+  submitted = false;
 
-  getErrorMessage() {
-    return this.email.hasError('required') ? 'You must enter a value' :
-      this.email.hasError('email') ? 'Not a valid email' :
-        '';
-  }
-
-  constructor() { }
+  constructor(private formBuilder: FormBuilder) { }
 
   ngOnInit() {
+    this.registerForm = this.formBuilder.group({
+      userName: ['', [Validators.required, Validators.minLength(4)]],
+      email: ['', [Validators.required, Validators.email]],
+      phone: ['', [Validators.required, Validators.pattern('^((\\+)|(00))[0-9]{10,14}$')]]
+    });
   }
 
+  // convenience getter for easy access to form fields
+  get f() { return this.registerForm.controls; }
+
+  onSubmit() {
+    this.submitted = true;
+
+    // stop here if form is invalid
+    if (this.registerForm.invalid) {
+      return;
+    }
+
+    alert('IM DONE)))!! :-)');
+  }
 }

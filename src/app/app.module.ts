@@ -8,8 +8,7 @@ import { AppComponent } from './app.component';
 import { MainComponent } from './main/main.component';
 import { ListComponent } from './list/list.component';
 import { FormComponent } from './form/form.component';
-import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
-import { InMemoryDataService } from './in-memory-data.service';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -23,6 +22,8 @@ import { InMemoryDataService } from './in-memory-data.service';
     AppRoutingModule,
     BrowserAnimationsModule,
     MaterialModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -6,28 +6,19 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./list.component.css']
 })
 export class ListComponent implements OnInit {
-persons;
+  persons = [
+    { id: 1, name: 'Peter' },
+    { id: 2, name: 'Yanni' },
+    { id: 3, name: 'Susan' },
+    { id: 4, name: 'Sandy' }
+  ];
 
 
   constructor() { }
 
   ngOnInit() {
-    this.persons = [
-      { name: 'Peter' },
-      { name: 'Yanni' },
-      { name: 'Susan' },
-      { name: 'Sandy' }
-    ];
   }
-  deletePerson(name){
-      console.log(name)
-
-      for(let i=0; i < this.persons.length; i++) {
-        
-      if(this.persons[i]["name"] == name){
-        this.persons.splice(i, 1);
-      }
-    }
+  deletePerson(id: number) {
+    this.persons = this.persons.filter(person => person.id !== id);
   }
-
-}
+  }
