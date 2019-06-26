@@ -10,6 +10,7 @@ const routes: Routes = [
   { path: 'main', component: MainComponent },
   { path: 'main/list', component: ListComponent },
   { path: 'main/form', component: FormComponent },
+  { path: 'sample', loadChildren: './sample/smple.module#SampleModule' },
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

@@ -1,4 +1,8 @@
 <mat-list class="persons">
-  <mat-list-item *ngFor="let person of persons">{{person.name}}<button mat-icon-button class="remove_button" (click)="deletePerson(person.id)"><mat-icon>delete</mat-icon></button></mat-list-item>
+  <mat-list-item *ngFor="let person of persons">
+    <a>{{person.name}}</a>
+    <button mat-icon-button class="remove_button" (click)="deletePerson(person.id)">
+      <mat-icon>delete</mat-icon>
+    </button></mat-list-item>
 
 </mat-list>

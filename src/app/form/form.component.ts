@@ -16,7 +16,7 @@ export class FormComponent implements OnInit {
     this.registerForm = this.formBuilder.group({
       userName: ['', [Validators.required, Validators.minLength(4)]],
       email: ['', [Validators.required, Validators.email]],
-      phone: ['', [Validators.required, Validators.pattern('^((\\+)|(00))[0-9]{10,14}$')]]
+      phone: ['', [Validators.required, Validators.pattern('^((\\+38)|(00))[0-9]{10,14}$')]]
     });
   }
 
@@ -26,10 +26,6 @@ export class FormComponent implements OnInit {
   onSubmit() {
     this.submitted = true;
 
-    // stop here if form is invalid
-    if (this.registerForm.invalid) {
-      return;
-    }
 
     alert('IM DONE)))!! :-)');
   }
