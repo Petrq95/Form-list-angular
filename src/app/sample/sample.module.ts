@@ -4,15 +4,21 @@ import { RouterModule, Routes, } from '@angular/router';
 import { SampleComponent } from './sample/sample.component';
 import { ParentComponent } from './parent/parent.component';
 import { ChildComponent } from './child/child.component';
+import { MaterialModule } from '../material/material.module';
+
 
 const routes: Routes = [
-  {path: '', component: SampleComponent }
+  {path: '/sample', component: SampleComponent},
+  { path: '', component: ParentComponent },
+  {path: '', component: ChildComponent }
+
 ];
 @NgModule({
   declarations: [SampleComponent, ParentComponent, ChildComponent],
   imports: [
     CommonModule,
-    RouterModule
+    MaterialModule,
+    RouterModule.forChild(routes)
   ]
 })
 export class SampleModule { }
