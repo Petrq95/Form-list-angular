@@ -11,6 +11,7 @@ const routes: Routes = [
   { path: 'main/list', component: ListComponent },
   { path: 'main/form', component: FormComponent },
   { path: 'sample', loadChildren: () => import('./sample/sample.module').then(m => m.SampleModule), },
+  { path: 'ngrx', loadChildren: () => import('./ngrx/ngrx.module').then(m => m.NgrxModule), },
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
