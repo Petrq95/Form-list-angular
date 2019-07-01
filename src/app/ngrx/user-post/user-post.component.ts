@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Action } from '@ngrx/store';
+import { User } from '../model/user.model';
 
 @Component({
   selector: 'app-user-post',
@@ -10,6 +12,7 @@ export class UserPostComponent implements OnInit {
   users: any;
   private url = 'https://jsonplaceholder.typicode.com/users';
 
+
   constructor(http: HttpClient) {
 
     http.get(this.url)
@@ -18,7 +21,6 @@ export class UserPostComponent implements OnInit {
         this.users = response;
       });
   }
-
   ngOnInit() {
   }
 

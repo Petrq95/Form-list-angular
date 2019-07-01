@@ -4,7 +4,6 @@ import { RouterModule, Routes, } from '@angular/router';
 import { UserPostComponent } from './user-post/user-post.component';
 import { NgrxComponent } from './ngrx/ngrx.component';
 import { MaterialModule } from '../material/material.module';
-import { PostsComponent } from './posts/posts.component';
 
 const routesFeature: Routes = [
   { path: '/ngrx', component: NgrxComponent },
@@ -12,7 +11,7 @@ const routesFeature: Routes = [
 
 ];
 @NgModule({
-  declarations: [UserPostComponent, NgrxComponent, PostsComponent],
+  declarations: [UserPostComponent, NgrxComponent, ],
   imports: [
     CommonModule,
     RouterModule.forChild(routesFeature),

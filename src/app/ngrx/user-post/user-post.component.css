@@ -1,3 +1,38 @@
+.user-post-block{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
 .user-block{
+    min-width: 310px;
     width: 40%;
+    border: solid 2px black;
+}
+.post-block{
+    min-width: 310px;
+    width: 40%;
+    border: solid 2px black;
+}
+mat-list{
+    display: flex;
+    flex-direction: column;
+}
+mat-list-item{
+    display: flex;
+    flex-direction: column;
+     justify-content: space-around;
+}
+mat-list :hover{
+    cursor: pointer;
+    background-color: aquamarine;
+}
+.remove-button{
+  position: relative;
+}
+.user-name{
+    width: 70%;
+}
+button :hover{
+ background-color: aliceblue;
 }

@@ -1,5 +1,30 @@
-<mat-selection-list class="user-block">
-  <mat-list-option *ngFor="let user of users">
-    {{user.name}}
-  </mat-list-option>
-</mat-selection-list>
+<div class="user-post-block">
+  <div class="user-block">
+  <h2>Users</h2>
+  <hr>
+  <mat-list>
+    <mat-list-item *ngFor="let user of users">
+        <a class="user-name">{{user.name}}</a>
+      <div class="remove-button" (click)="deleteUser()">
+        <button mat-icon-button >
+          <mat-icon>delete</mat-icon>
+        </button>
+      </div>
+      <div class="update-button">
+        <button mat-icon-button>
+          <mat-icon>update</mat-icon>
+        </button>
+      </div>
+        <div class="info-button">
+          <button mat-icon-button>
+            <mat-icon>info</mat-icon>
+          </button>
+        </div>
+    </mat-list-item>
+  </mat-list>
+  </div>
+  <div class="post-block">
+    <h2>Posts</h2>
+    
+  </div>
+</div>
