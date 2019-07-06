@@ -10,6 +10,15 @@ import { ListComponent } from './list/list.component';
 import { FormComponent } from './form/form.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { StoreModule } from '@ngrx/store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { EffectsModule } from '@ngrx/effects';
+import {
+  StoreRouterConnectingModule,
+  routerReducer,
+  RouterStateSerializer
+} from '@ngrx/router-store';
+import { CustomSerializer } from './shared/utils';
+
 import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
@@ -27,11 +36,13 @@ import { HttpClientModule } from '@angular/common/http';
     FormsModule,
     ReactiveFormsModule,
     NoopAnimationsModule,
-    StoreModule,
+    StoreModule.forRoot({ router: routerReducer }),
+    EffectsModule.forRoot([]),
+    StoreDevtoolsModule.instrument(),
     HttpClientModule,
-
+    StoreRouterConnectingModule.forRoot({ stateKey: 'router' }),
   ],
-  providers: [],
+  providers: [{ provide: RouterStateSerializer, useClass: CustomSerializer }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -3,20 +3,20 @@
   <h2>Users</h2>
   <hr>
   <mat-list>
-    <mat-list-item *ngFor="let user of users">
+    <mat-list-item *ngFor="let user of (users$ |async)">
         <a class="user-name">{{user.name}}</a>
-      <div class="remove-button" (click)="deleteUser()">
+      <div class="remove-button" (click)=deleteUser(user)>
         <button mat-icon-button >
           <mat-icon>delete</mat-icon>
         </button>
       </div>
       <div class="update-button">
-        <button mat-icon-button>
+        <button mat-icon-button (click)=editUser(user)>
           <mat-icon>update</mat-icon>
         </button>
       </div>
         <div class="info-button">
-          <button mat-icon-button>
+          <button mat-icon-button (click)=editUser(user)>
             <mat-icon>info</mat-icon>
           </button>
         </div>
@@ -25,6 +25,7 @@
   </div>
   <div class="post-block">
     <h2>Posts</h2>
+    <hr>
     
   </div>
 </div>
