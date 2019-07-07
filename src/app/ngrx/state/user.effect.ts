@@ -50,6 +50,25 @@ export class UserEffect {
     );
 
 
+    @Effect()
+    updateUser$: Observable<Action> = this.actions$.pipe(
+        ofType<UserActions.UpdateUser>(
+            UserActions.UserActionTypes.UPDATE_USER
+        ),
+        map((action: UserActions.UpdateUser) => action.payload),
+        mergeMap((user: User) =>
+            this.userService.updateUser(user).pipe(
+                map(
+                    (updateUser: User) =>
+                        new UserActions.UpdateUserSuccess({
+                            id: updateUser.id,
+                            changes: updateUser
+                        })
+                ),
+                catchError(err => of(new UserActions.UpdateUserFail(err)))
+            )
+        )
+    );
 
     @Effect()
     deleteUser$: Observable<Action> = this.actions$.pipe(

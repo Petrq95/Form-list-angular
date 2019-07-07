@@ -21,10 +21,10 @@ export class UserService {
     return this.http.get<User>(`${this.usersUrl}/${payload}`);
   }
 
-  updateUser(customer: User): Observable<User> {
+  updateUser(users: User): Observable<User> {
     return this.http.patch<User>(
-      `${this.usersUrl}/${customer.id}`,
-      customer
+      `${this.usersUrl}/${users.id}`,
+      users
     );
   }
 

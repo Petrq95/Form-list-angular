@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes, } from '@angular/router';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 import { EffectsModule, Actions } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
@@ -17,7 +18,8 @@ import { UserInfoComponent } from './user-info/user-info.component';
 
 const routesFeature: Routes = [
   { path: '/users', component: NgrxComponent },
-  { path: '', component: UserComponent }
+  { path: '', component: UserComponent },
+  { path: '', component: UserInfoComponent },
 
 ];
 @NgModule({
@@ -28,6 +30,9 @@ const routesFeature: Routes = [
     StoreModule.forFeature('users', userReducer),
     EffectsModule.forFeature([UserEffect]),
     MaterialModule,
+    ReactiveFormsModule,
+    FormsModule,
+
   ]
 })
 export class NgrxModule { }

@@ -36,3 +36,6 @@ mat-list :hover{
 button :hover{
  background-color: aliceblue;
 }
+h2{
+    text-align: center;
+}

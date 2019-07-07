@@ -67,6 +67,15 @@ export function userReducer(
             };
         }
 
+        case userActions.UserActionTypes.UPDATE_USER_SUCCESS: {
+            return userAdapter.updateOne(action.payload, state);
+        }
+        case userActions.UserActionTypes.UPDATE_USER_FAIL: {
+            return {
+                ...state,
+                error: action.payload
+            };
+        }
 
         case userActions.UserActionTypes.DELETE_USER_SUCCESS: {
             return userAdapter.removeOne(action.payload, state);
