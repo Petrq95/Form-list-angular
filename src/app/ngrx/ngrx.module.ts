@@ -6,7 +6,9 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { EffectsModule, Actions } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 import { userReducer } from './state/user.reducer';
+import { postReducer } from './state/post.reducer';
 import { UserEffect } from './state/user.effect';
+import { PostEffect } from './state/post.effect';
 
 import { UserComponent } from './user/user.component';
 import { NgrxComponent } from './users/ngrx.component';
@@ -19,7 +21,9 @@ import { UserInfoComponent } from './user-info/user-info.component';
 const routesFeature: Routes = [
   { path: '/users', component: NgrxComponent },
   { path: '', component: UserComponent },
+  { path: '', component: PostComponent},
   { path: '', component: UserInfoComponent },
+
 
 ];
 @NgModule({
@@ -28,7 +32,9 @@ const routesFeature: Routes = [
     CommonModule,
     RouterModule.forChild(routesFeature),
     StoreModule.forFeature('users', userReducer),
+    StoreModule.forFeature('posts', postReducer),
     EffectsModule.forFeature([UserEffect]),
+    EffectsModule.forFeature([PostEffect]),
     MaterialModule,
     ReactiveFormsModule,
     FormsModule,

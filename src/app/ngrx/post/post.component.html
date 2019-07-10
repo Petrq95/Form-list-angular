@@ -1,3 +1,5 @@
-<p>
-  post works!
-</p>
+<mat-selection-list #posts>
+  <mat-list-option *ngFor="let post of (posts$ | async)">
+    {{post.title}}
+  </mat-list-option>
+</mat-selection-list>

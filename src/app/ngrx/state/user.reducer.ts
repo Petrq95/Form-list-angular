@@ -21,7 +21,7 @@ export const userAdapter: EntityAdapter<User> = createEntityAdapter<
     User
 >();
 
-export const defaultuser: UserState = {
+export const defaultUser: UserState = {
     ids: [],
     entities: {},
     selecteduserId: null,
@@ -30,7 +30,7 @@ export const defaultuser: UserState = {
     error: ''
 };
 
-export const initialState = userAdapter.getInitialState(defaultuser);
+export const initialState = userAdapter.getInitialState(defaultUser);
 
 export function userReducer(
     state = initialState,
