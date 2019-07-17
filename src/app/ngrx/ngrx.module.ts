@@ -10,8 +10,8 @@ import { postReducer } from './state/post.reducer';
 import { UserEffect } from './state/user.effect';
 import { PostEffect } from './state/post.effect';
 
-import { UserComponent } from './user/user.component';
 import { NgrxComponent } from './users/ngrx.component';
+import { UserComponent } from './user/user.component';
 import { MaterialModule } from '../material/material.module';
 import { PostComponent } from './post/post.component';
 import { UserInfoComponent } from './user-info/user-info.component';
@@ -19,7 +19,7 @@ import { UserInfoComponent } from './user-info/user-info.component';
 
 
 const routesFeature: Routes = [
-  { path: '/users', component: NgrxComponent },
+  { path: '', component: NgrxComponent },
   { path: '', component: UserComponent },
   { path: '', component: PostComponent},
   { path: '', component: UserInfoComponent },
@@ -32,8 +32,8 @@ const routesFeature: Routes = [
     CommonModule,
     RouterModule.forChild(routesFeature),
     StoreModule.forFeature('users', userReducer),
-    StoreModule.forFeature('posts', postReducer),
     EffectsModule.forFeature([UserEffect]),
+    StoreModule.forFeature('posts', postReducer),
     EffectsModule.forFeature([PostEffect]),
     MaterialModule,
     ReactiveFormsModule,

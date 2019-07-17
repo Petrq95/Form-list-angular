@@ -7,10 +7,11 @@ import { Observable, of } from 'rxjs';
 import { map, mergeMap, catchError } from 'rxjs/operators';
 
 import { PostService } from '../post.service';
-import * as PostActions from '../state/post.action';
+import * as postAction from '../state/post.action';
 import { Post } from '../model/post.model';
 
 @Injectable()
+
 export class PostEffect {
     constructor(
         private actions$: Actions,
@@ -19,32 +20,33 @@ export class PostEffect {
 
     @Effect()
     loadPosts$: Observable<Action> = this.actions$.pipe(
-        ofType<PostActions.LoadPosts>(
-            PostActions.PostActionTypes.LOAD_POSTS
+        ofType<postAction.LoadPosts>(
+            postAction.PostActionTypes.LOAD_POSTS
         ),
-        mergeMap((action: PostActions.LoadPosts) =>
+        mergeMap((action: postAction.LoadPosts) =>
             this.postService.getPosts().pipe(
                 map(
-                    (Posts: Post[]) =>
-                        new PostActions.LoadPostsSuccess(Posts)
+                    (posts: Post[]) =>
+                        new postAction.LoadPostsSuccess(posts)
                 ),
-                catchError(err => of(new PostActions.LoadPostsFail(err)))
+                catchError(err => of(new postAction.LoadPostsFail(err)))
             )
         )
     );
 
     @Effect()
     loadPost$: Observable<Action> = this.actions$.pipe(
-        ofType<PostActions.LoadPost>(
-            PostActions.PostActionTypes.LOAD_POSTS
+        ofType<postAction.LoadPost>(
+            postAction.PostActionTypes.LOAD_POST
         ),
-        mergeMap((action: PostActions.LoadPost) =>
+        mergeMap((action: postAction.LoadPost) =>
             this.postService.getPostById(action.payload).pipe(
                 map(
                     (post: Post) =>
-                        new PostActions.LoadPostSuccess(post)
+                        new postAction.LoadPostSuccess(post)
                 ),
-                catchError(err => of(new PostActions.LoadPostFail(err)))
+                catchError(err => of(new postAction.LoadPostFail(err)))
             )
         )
-    ); }
+    );
+}

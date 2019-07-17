@@ -23,7 +23,7 @@ export class UserComponent implements OnInit {
 
   ngOnInit() {
     this.store.dispatch(new userActions.LoadUsers());
-    this.users$ = this.store.pipe(select(fromUser.getusers));
+    this.users$ = this.store.pipe(select(fromUser.getUsers));
     this.error$ = this.store.pipe(select(fromUser.getError));
   }
 

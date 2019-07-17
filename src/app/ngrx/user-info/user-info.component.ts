@@ -32,24 +32,24 @@ export class UserInfoComponent implements OnInit {
     });
 
     const user$: Observable<User> = this.store.select(
-      fromUser.getCurrentuser
+      fromUser.getCurrentUser
     );
 
-    user$.subscribe(currentuser => {
-      if (currentuser) {
+    user$.subscribe(currentUser => {
+      if (currentUser) {
         this.userForm.patchValue({
-          name: currentuser.name,
-          phone: currentuser.phone,
-          email: currentuser.email,
-          website: currentuser.website,
-          id: currentuser.id
+          name: currentUser.name,
+          phone: currentUser.phone,
+          email: currentUser.email,
+          website: currentUser.website,
+          id: currentUser.id
         });
       }
     });
   }
 
   updateUser() {
-    const updateduser: User = {
+    const updatedUser: User = {
       name: this.userForm.get('name').value,
       phone: this.userForm.get('phone').value,
       email: this.userForm.get('email').value,
@@ -57,7 +57,7 @@ export class UserInfoComponent implements OnInit {
       id: this.userForm.get('id').value
     };
 
-    this.store.dispatch(new userActions.UpdateUser(updateduser));
+    this.store.dispatch(new userActions.UpdateUser(updatedUser));
   }
 
 }

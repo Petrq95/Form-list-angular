@@ -1,70 +1,53 @@
 import * as postActions from '../state/post.action';
-import { createFeatureSelector, createSelector } from '@ngrx/store';
-
-import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
+import {createFeatureSelector, createSelector} from '@ngrx/store';
 
 import { Post } from '../model/post.model';
 import * as fromRoot from '../../state/app-state';
 
-export interface PostState extends EntityState<Post> {
-    selectedPostId: number | null;
+
+export interface PostState  {
+    posts: Post[];
     loading: boolean;
     loaded: boolean;
     error: string;
 }
-
 export interface AppState extends fromRoot.AppState {
     posts: PostState;
 }
-
-export const postAdapter: EntityAdapter<Post> = createEntityAdapter<
-    Post
->();
-
-export const defaultPost: PostState = {
-    ids: [],
-    entities: {},
-    selectedPostId: null,
+export const  initialState: PostState = {
+    posts: [],
     loading: false,
     loaded: false,
     error: ''
+
 };
 
-export const initialState = postAdapter.getInitialState(defaultPost);
-
-export function postReducer(
-    state = initialState,
-    action: postActions.Action
-): PostState {
+export function postReducer(state = initialState, action: postActions.Action): PostState {
     switch (action.type) {
+        case postActions.PostActionTypes.LOAD_POSTS: {
+            return {
+                ...state,
+                loading: true
+            };
+        }
         case postActions.PostActionTypes.LOAD_POSTS_SUCCESS: {
-            return postAdapter.addAll(action.payload, {
+            return {
                 ...state,
                 loading: false,
-                loaded: true
-            });
+                loaded: true,
+                posts: action.payload
+            };
         }
         case postActions.PostActionTypes.LOAD_POSTS_FAIL: {
             return {
                 ...state,
-                entities: {},
                 loading: false,
-                loaded: false,
+                loaded: true,
                 error: action.payload
             };
         }
-
-        case postActions.PostActionTypes.LOAD_POST_SUCCESS: {
-            return postAdapter.addOne(action.payload, {
-                ...state,
-                selectedpostId: action.payload.id
-            });
-        }
-        case postActions.PostActionTypes.LOAD_POST_FAIL: {
-            return {
-                ...state,
-                error: action.payload
-            };
+        default: {
+            return state;
         }
     }
 }
@@ -74,30 +57,20 @@ const getPostFeatureState = createFeatureSelector<PostState>(
 
 export const getPosts = createSelector(
     getPostFeatureState,
-    postAdapter.getSelectors().selectAll
+    (state: PostState) => state.posts
 );
-
 export const getPostsLoading = createSelector(
     getPostFeatureState,
     (state: PostState) => state.loading
 );
 
-export const getPostsLoaded = createSelector(
+export const getPostsloaded = createSelector(
     getPostFeatureState,
     (state: PostState) => state.loaded
 );
-
 export const getError = createSelector(
     getPostFeatureState,
     (state: PostState) => state.error
 );
-export const getCurrentPostId = createSelector(
-    getPostFeatureState,
-    (state: PostState) => state.selectedPostId
-);
-export const getCurrentPost = createSelector(
-    getPostFeatureState,
-    getCurrentPostId,
-    state => state.entities[state.selectedPostId]
-);
+
 

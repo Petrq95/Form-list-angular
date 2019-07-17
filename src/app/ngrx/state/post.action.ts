@@ -9,7 +9,6 @@ export enum PostActionTypes {
     LOAD_POST = '[Post] Load Post',
     LOAD_POST_SUCCESS = '[Post] Load Post Success',
     LOAD_POST_FAIL = '[Post] Load Post Fail',
-
 }
 
 export class LoadPosts implements Action {
@@ -46,6 +45,8 @@ export class LoadPostFail implements Action {
     constructor(public payload: string) { }
 }
 
+
+
 export type Action =
     | LoadPosts
     | LoadPostsSuccess
@@ -53,3 +54,4 @@ export type Action =
     | LoadPost
     | LoadPostSuccess
     | LoadPostFail;
+
