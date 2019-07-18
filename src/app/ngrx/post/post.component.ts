@@ -5,7 +5,7 @@ import { Observable} from 'rxjs';
 
 import * as postActions from '../state/post.action';
 import * as fromPost from '../state/post.reducer';
-
+import * as fromIndex from '../state/index';
 import { Post } from '../model/post.model';
 
 @Component({
@@ -21,6 +21,7 @@ export class PostComponent implements OnInit {
   ngOnInit() {
     this.store.dispatch(new postActions.LoadPosts());
     this.posts$ = this.store.pipe(select(fromPost.getPosts));
+    this.posts$ = this.store.pipe(select(fromIndex.selectVisiblePosts));
   }
 }
 
