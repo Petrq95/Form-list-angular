@@ -9,6 +9,7 @@ export enum PostActionTypes {
     LOAD_POST = '[Post] Load Post',
     LOAD_POST_SUCCESS = '[Post] Load Post Success',
     LOAD_POST_FAIL = '[Post] Load Post Fail',
+    SHOW_FILTERED_POST = '[Post] Show Filtered Post'
 }
 
 export class LoadPosts implements Action {
@@ -44,6 +45,9 @@ export class LoadPostFail implements Action {
 
     constructor(public payload: string) { }
 }
+export class FilterPost implements Action {
+    readonly type = PostActionTypes.SHOW_FILTERED_POST;
+}
 
 
 
@@ -53,5 +57,6 @@ export type Action =
     | LoadPostsFail
     | LoadPost
     | LoadPostSuccess
-    | LoadPostFail;
+    | LoadPostFail
+    | FilterPost;
 

@@ -15,14 +15,12 @@ import { Post } from '../model/post.model';
 })
 export class PostComponent implements OnInit {
   posts$: Observable<Post[]>;
+  // tslint:disable-next-line: no-inferrable-types
 
   constructor(private store: Store<fromPost.AppState>) { }
 
   ngOnInit() {
     this.store.dispatch(new postActions.LoadPosts());
-    this.posts$ = this.store.pipe(select(fromPost.getPosts));
     this.posts$ = this.store.pipe(select(fromIndex.selectVisiblePosts));
   }
 }
-
-

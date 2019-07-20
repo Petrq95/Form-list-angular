@@ -2,12 +2,17 @@
   <div class="user-block">
   <h2>Users</h2>
   <hr>
-  <mat-list>
-    <mat-list-item (click)=editUser(user) *ngFor="let user of (users$ |async)">
+  <mat-list >
+    <mat-list-item class="user"  (click)=hideSpinner() (click)=visabilitiPost() (click)=editUser(user)  *ngFor="let user of (users$ |async)">
         <a class="user-name">{{user.name}}</a>
       <div class="remove-button" (click)=deleteUser(user)>
         <button mat-icon-button >
           <mat-icon>delete</mat-icon>
+        </button>
+      </div>
+      <div class="info-button" routerLink="ngrx/user-info" (click)=editUser(user)>
+        <button mat-icon-button>
+          <mat-icon>info</mat-icon>
         </button>
       </div>
     </mat-list-item>
@@ -15,10 +20,32 @@
     </mat-list>
     
   </div>
-  <div class="post-block">
-      <h2>Posts</h2>
-      <hr>
-      <app-post></app-post>
-    </div>
+    <div class="post-block" style="overflow: scroll; height: xyz;" #scrollMe scrollTop="scrollMe.scrollHeight">
+        <h2>Posts</h2>
+        <hr>
+        <mat-spinner id="spinner"  style="display: block;"></mat-spinner>
+      <app-post id="myPost" style="display: none;"></app-post>
+  </div>
 </div>
-<app-user-info></app-user-info>
+<div class="mt-4">
+  <h3>Edit User</h3>
+  <form [formGroup]="userForm" class="my_form" (submit)="updateUser()">
+    <label class="sr-only" for="Name">Name</label>
+    <mat-form-field class="form-group">
+        <input matInput class="form-control" formControlName="name" >
+    </mat-form-field>
+    <label class="sr-only"for="Phone">Phone</label>
+    <mat-form-field class="form-group">
+      <input matInput class="form-control" formControlName="phone" >
+    </mat-form-field>
+    <label class="sr-only" for="Email">Email</label>
+    <mat-form-field class="form-group">
+      <input matInput class="form-control" formControlName="email" >
+    </mat-form-field>
+    <label class="sr-only" for="Website">Website</label>
+    <mat-form-field class="form-group">
+      <input matInput class="form-control" formControlName="website" >
+    </mat-form-field>
+    <button mat-raised-button type="submit" color="primary">UpdateUser</button>
+
+  </form>

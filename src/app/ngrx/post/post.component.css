@@ -3,3 +3,6 @@
     width: 40%;
     border: solid 2px black;
 }
+mat-list-item{
+    border-bottom: solid 2px black;
+}

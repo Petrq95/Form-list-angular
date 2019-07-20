@@ -18,11 +18,12 @@ import { UserInfoComponent } from './user-info/user-info.component';
 
 
 
+
 const routesFeature: Routes = [
   { path: '', component: NgrxComponent },
   { path: '', component: UserComponent },
   { path: '', component: PostComponent},
-  { path: '', component: UserInfoComponent },
+  { path: 'ngrx/user-info', component: UserInfoComponent },
 
 
 ];
@@ -38,7 +39,6 @@ const routesFeature: Routes = [
     MaterialModule,
     ReactiveFormsModule,
     FormsModule,
-
   ]
 })
 export class NgrxModule { }

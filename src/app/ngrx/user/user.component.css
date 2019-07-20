@@ -3,6 +3,7 @@
     flex-direction: row;
     justify-content: space-around;
     flex-wrap: wrap;
+    height: 580px;
 }
 .user-block{
     min-width: 310px;
@@ -13,6 +14,10 @@
     min-width: 310px;
     width: 40%;
     border: solid 2px black;
+    height: 580px;
+}
+hr{
+    width: 2px;
 }
 mat-list{
     display: flex;
@@ -30,6 +35,9 @@ mat-list :hover{
 .remove-button{
   position: relative;
 }
+.user{
+    border-bottom: solid 2px black
+}
 .user-name{
     width: 70%;
 }
@@ -38,4 +46,35 @@ button :hover{
 }
 h2{
     text-align: center;
+}
+.active{
+    background-color: aquamarine;
+}
+.example-h2 {
+  margin: 10px;
+}
+
+.example-section {
+  display: flex;
+  align-content: center;
+  align-items: center;
+  height: 60px;
+}
+
+.example-margin {
+  margin: 0 10px;
+}
+.my_form {
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  padding-left: 20px;
+  width: 80%
+
+}
+h3{
+    text-align: center;
+}
+#spinner{
+    margin: auto;
 }
