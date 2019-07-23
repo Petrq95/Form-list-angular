@@ -2,7 +2,7 @@
   <div class="user-block">
   <h2>Users</h2>
   <hr>
-  <mat-list >
+  <mat-list>
     <mat-list-item class="user"  (click)=hideSpinner() (click)=visabilitiPost() (click)=editUser(user)  *ngFor="let user of (users$ |async)">
         <a class="user-name">{{user.name}}</a>
       <div class="remove-button" (click)=deleteUser(user)>
@@ -27,7 +27,7 @@
       <app-post id="myPost" style="display: none;"></app-post>
   </div>
 </div>
-<div class="mt-4">
+<div>
   <h3>Edit User</h3>
   <form [formGroup]="userForm" class="my_form" (submit)="updateUser()">
     <label class="sr-only" for="Name">Name</label>
@@ -49,3 +49,4 @@
     <button mat-raised-button type="submit" color="primary">UpdateUser</button>
 
   </form>
+  </div>

@@ -14,7 +14,7 @@ import { User } from '../model/user.model';
 export class UserEffect {
     constructor(
         private actions$: Actions,
-        private userService: UserService
+        private userService: UserService,
     ) { }
 
     @Effect()
