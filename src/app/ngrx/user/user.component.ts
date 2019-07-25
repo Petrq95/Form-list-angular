@@ -5,9 +5,10 @@ import { Observable } from 'rxjs';
 
 import * as userActions from '../state/user.action';
 import * as fromUser from '../state/user.reducer';
-
 import { User} from '../model/user.model';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-user',
   templateUrl: './user.component.html',
@@ -17,12 +18,16 @@ export class UserComponent implements OnInit {
 
   constructor(private store: Store<fromUser.AppState>,
               private fb: FormBuilder,
+              private router: Router,
+              private route: ActivatedRoute,
               ) { }
   users$: Observable<User[]>;
 // tslint:disable-next-line: ban-types
   error$: Observable<String>;
   userForm: FormGroup;
-
+  user$: Observable<User> = this.store.select(
+    fromUser.getCurrentUser
+  );
   hideSpinner() {
     const spinnerVisible = document.getElementById('spinner');
     if (spinnerVisible.style.display === 'block') {
@@ -63,8 +68,11 @@ export class UserComponent implements OnInit {
       this.store.dispatch(new userActions.DeleteUser(user.id));
     }
   }
-
+  editUserInfo(user: User) {
+    this.router.navigate(['ngrx/info', user.name]);
+  }
   editUser(user: User) {
+
     this.store.dispatch(new userActions.LoadUser(user.id));
   }
   updateUser() {

@@ -19,11 +19,12 @@ import { UserInfoComponent } from './user-info/user-info.component';
 
 
 
-const routesFeature: Routes = [
-  { path: '', component: NgrxComponent },
+const routes: Routes = [
+  { path: '', redirectTo: '/ngrx', pathMatch: 'full' },
+  { path: 'ngrx', component: NgrxComponent },
   { path: '', component: UserComponent },
   { path: '', component: PostComponent},
-  { path: 'ngrx/user-info', component: UserInfoComponent },
+  { path: 'info/:name', component: UserInfoComponent },
 
 
 ];
@@ -31,7 +32,7 @@ const routesFeature: Routes = [
   declarations: [UserComponent, NgrxComponent, PostComponent, UserInfoComponent, ],
   imports: [
     CommonModule,
-    RouterModule.forChild(routesFeature),
+    RouterModule.forChild(routes),
     StoreModule.forFeature('users', userReducer),
     EffectsModule.forFeature([UserEffect]),
     StoreModule.forFeature('posts', postReducer),

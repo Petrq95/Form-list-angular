@@ -126,3 +126,4 @@ export const getCurrentUser = createSelector(
     getCurrentUserId,
     state => state.entities[state.selectedUserId]
 );
+

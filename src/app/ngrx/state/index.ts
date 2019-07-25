@@ -17,3 +17,11 @@ export const selectVisiblePosts = createSelector(
         }
     }
 );
+export const userInfo = createSelector(
+    fromUser.getCurrentUser,
+    (getCurrentUser: User) => {
+     if (getCurrentUser) {
+         return getCurrentUser;
+      }
+    }
+     );

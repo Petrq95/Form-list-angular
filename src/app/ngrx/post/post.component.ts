@@ -21,6 +21,10 @@ export class PostComponent implements OnInit {
 
   ngOnInit() {
     this.store.dispatch(new postActions.LoadPosts());
-    this.posts$ = this.store.pipe(select(fromIndex.selectVisiblePosts));
+    this.getPost();
   }
+  getPost() {
+    this.posts$ = this.store.pipe(select(fromIndex.selectVisiblePosts));
+
+}
 }
