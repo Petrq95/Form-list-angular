@@ -28,6 +28,7 @@ export class UserComponent implements OnInit {
   user$: Observable<User> = this.store.select(
     fromUser.getCurrentUser
   );
+  selectedUser: User;
   hideSpinner() {
     const spinnerVisible = document.getElementById('spinner');
     if (spinnerVisible.style.display === 'block') {
@@ -62,7 +63,9 @@ export class UserComponent implements OnInit {
       }
     });
   }
-
+  onSelect(user: User): void {
+    this.selectedUser = user;
+  }
   deleteUser(user: User) {
     if (confirm('Are You Sure You want to Delete the User?')) {
       this.store.dispatch(new userActions.DeleteUser(user.id));

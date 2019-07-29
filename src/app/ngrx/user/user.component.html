@@ -3,7 +3,7 @@
   <h2>Users</h2>
   <hr>
   <mat-list>
-    <mat-list-item class="user"  (click)=hideSpinner() (click)=visabilitiPost() (click)=editUser(user)  *ngFor="let user of (users$ |async)">
+    <mat-list-item [class.selected]="user === selectedUser"  (click)="onSelect(user)" class="user" (click)=hideSpinner() (click)=visabilitiPost() (click)=editUser(user)  *ngFor="let user of (users$ |async)">
         <a class="user-name">{{user.name}}</a>
       <div class="remove-button" (click)=deleteUser(user)>
         <button mat-icon-button >
