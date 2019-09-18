@@ -1,3 +1,4 @@
+
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
@@ -21,10 +22,10 @@ export class UserService {
     return this.http.get<User>(`${this.usersUrl}/${payload}`);
   }
 
-  updateUser(users: User): Observable<User> {
+  updateUser(user: User): Observable<User> {
     return this.http.patch<User>(
-      `${this.usersUrl}/${users.id}`,
-      users
+      `${this.usersUrl}/${user.id}`,
+      user
     );
   }
 

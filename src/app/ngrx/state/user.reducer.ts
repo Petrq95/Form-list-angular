@@ -1,5 +1,5 @@
 import * as userActions from '../state/user.action';
-import { createFeatureSelector, createSelector } from '@ngrx/store';
+import { createFeatureSelector, createSelector, on, createReducer, Action } from '@ngrx/store';
 
 import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
 
@@ -7,32 +7,50 @@ import { User } from '../model/user.model';
 import * as fromRoot from '../../state/app-state';
 
 export interface UserState extends EntityState<User> {
-    selectedUserId: number;
+    selectedUserId: number | null;
     loading: boolean;
     loaded: boolean;
     error: string;
 }
 
+
 export interface AppState extends fromRoot.AppState {
     users: UserState;
 }
 
-export const userAdapter: EntityAdapter<User> = createEntityAdapter<
-    User
->();
+export const userAdapter = createEntityAdapter< User>();
 
-export const defaultUser: UserState = {
-    ids: [],
-    entities: {},
+export const initialState: UserState = userAdapter.getInitialState({
+    // additional entity state properties
     selectedUserId: null,
-    loading: false,
-    loaded: false,
-    error: ''
-};
+    loading: null,
+    loaded: null,
+    error: null,
+  });
 
-export const initialState = userAdapter.getInitialState(defaultUser);
 
-export function userReducer(
+export const userReducer = createReducer(
+    initialState,
+  on(userActions.loadUsersSuccess, (state, { users }) => {
+    return userAdapter.addAll(users, state)
+  }),
+  on(userActions.loadUsersFail, (state, { errorMessage }) => ({ ...state, isLoading: false, errorMessage })),
+  on(userActions.loadUserSuccess, (state, { user }) => {
+        return userAdapter.addOne(user, {...state,
+            selectedUserId: user.id
+        }) 
+    }),
+  on(userActions.deleteUserSuccess, (state, { id }) => {
+        return userAdapter.removeOne(id, state);
+      }),
+  on(userActions.updateUser, (state, { user }) => {
+        return userAdapter.updateOne(user, state);
+    }),
+)
+export function reducer(state: UserState | undefined, action: Action) {
+    return userReducer(state, action);
+}
+/* export function userReducer(
     state = initialState,
     action: userActions.Action
 ): UserState {
@@ -91,11 +109,22 @@ export function userReducer(
             return state;
         }
     }
-}
+} */
 
 const getUserFeatureState = createFeatureSelector<UserState>(
     'users'
 );
+const {
+    selectIds,
+    selectEntities,
+  } = userAdapter.getSelectors();
+   
+  // select the array of user ids
+  export const selectUserIds = selectIds;
+   
+  // select the dictionary of user entities
+  export const selectUserEntities = selectEntities;
+   
 
 export const getUsers = createSelector(
     getUserFeatureState,
@@ -126,4 +155,3 @@ export const getCurrentUser = createSelector(
     getCurrentUserId,
     state => state.entities[state.selectedUserId]
 );
-

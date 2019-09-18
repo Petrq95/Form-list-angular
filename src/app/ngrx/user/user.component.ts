@@ -36,7 +36,7 @@ export class UserComponent implements OnInit {
     }
   }
   ngOnInit() {
-    this.store.dispatch(new userActions.LoadUsers());
+    this.store.dispatch(userActions.loadUsers());
     this.users$ = this.store.pipe(select(fromUser.getUsers));
     this.error$ = this.store.pipe(select(fromUser.getError));
     this.userForm = this.fb.group({
@@ -68,7 +68,7 @@ export class UserComponent implements OnInit {
   }
   deleteUser(user: User) {
     if (confirm('Are You Sure You want to Delete the User?')) {
-      this.store.dispatch(new userActions.DeleteUser(user.id));
+      this.store.dispatch(userActions.deleteUserSuccess({id: user.id}));
     }
   }
   editUserInfo(user: User) {
@@ -76,9 +76,9 @@ export class UserComponent implements OnInit {
   }
   editUser(user: User) {
 
-    this.store.dispatch(new userActions.LoadUser(user.id));
+    this.store.dispatch(userActions.loadUserSuccess({user}));
   }
-  updateUser() {
+updateUser() {
     const updatedUser: User = {
       name: this.userForm.get('name').value,
       phone: this.userForm.get('phone').value,
@@ -87,7 +87,7 @@ export class UserComponent implements OnInit {
       id: this.userForm.get('id').value
     };
 
-    this.store.dispatch(new userActions.UpdateUser(updatedUser));
+    this.store.dispatch(userActions.updateUser({user: {id: updatedUser.id, changes: updatedUser}}));
   }
   visabilitiPost() {
   const postVisible = document.getElementById('myPost');

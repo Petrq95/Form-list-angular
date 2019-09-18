@@ -1,10 +1,61 @@
-import { Action } from '@ngrx/store';
+import {createAction, props } from '@ngrx/store';
 
 import { Update } from '@ngrx/entity';
 
 import { User } from '../model/user.model';
 
-export enum UserActionTypes {
+export const loadUsers = createAction('[Users] Load Users');
+
+export const loadUsersSuccess = createAction('[Users] Load Success', props<{ users: User[] }>());
+
+export const loadUsersFail = createAction('[Users] Load Fail', props<{ errorMessage: string }>());
+
+export const loadUserSuccess = createAction('[User] Load User Success', props<{ user: User }>());
+
+export const loadUserFail = createAction('[Users] Load User Fail', props<{ errorMessage: string }>());
+
+export const updateUser = createAction('[User/API] Update User', props<{ user: Update<User> }>());
+
+export const updateUserFail = createAction('[Users] Update User Fail', props<{ errorMessage: string }>());
+
+export const deleteUser = createAction('[User] Delete User', props<{ id:number }>());
+
+export const deleteUserSuccess = createAction('[User] Delete User Success', props<{ id: number }>());
+
+export const deleteUserFail = createAction('[Users] Delete User Fail', props<{ errorMessage: string }>());
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* export enum UserActionTypes {
     LOAD_USERS = '[User] Load Users',
     LOAD_USERS_SUCCESS = '[User] Load Users Success',
     LOAD_USERS_FAIL = '[User] Load Users Fail',
@@ -103,3 +154,4 @@ export type Action =
     | DeleteUser
     | DeleteUserSuccess
     | DeleteUserFail;
+ */

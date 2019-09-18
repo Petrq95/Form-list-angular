@@ -39,7 +39,11 @@ import { HttpClientModule } from '@angular/common/http';
     MaterialModule,
     FormsModule,
     ReactiveFormsModule,
-    StoreModule.forRoot({ router: routerReducer }),
+    StoreModule.forRoot({ router: routerReducer },{runtimeChecks:{
+      strictActionImmutability: true,
+      strictStateImmutability: true
+    }}
+    ),
     EffectsModule.forRoot([]),
     StoreDevtoolsModule.instrument(),
     HttpClientModule,
