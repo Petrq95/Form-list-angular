@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { Store, select } from '@ngrx/store';
-import { Observable } from 'rxjs';
+import { Observable, from } from 'rxjs';
 
 import * as userActions from '../state/user.action';
 import * as fromUser from '../state/user.reducer';
@@ -9,6 +9,7 @@ import { User} from '../model/user.model';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
+import {UserService} from '../user.service'
 @Component({
   selector: 'app-user',
   templateUrl: './user.component.html',
@@ -20,6 +21,7 @@ export class UserComponent implements OnInit {
               private fb: FormBuilder,
               private router: Router,
               private route: ActivatedRoute,
+              private userService: UserService
               ) { }
   users$: Observable<User[]>;
 // tslint:disable-next-line: ban-types
@@ -68,7 +70,7 @@ export class UserComponent implements OnInit {
   }
   deleteUser(user: User) {
     if (confirm('Are You Sure You want to Delete the User?')) {
-      this.store.dispatch(userActions.deleteUserSuccess({id: user.id}));
+      this.store.dispatch(userActions.deleteUser({id: user.id}))
     }
   }
   editUserInfo(user: User) {
@@ -87,7 +89,7 @@ updateUser() {
       id: this.userForm.get('id').value
     };
 
-    this.store.dispatch(userActions.updateUser({user: {id: updatedUser.id, changes: updatedUser}}));
+    this.store.dispatch(userActions.updateUserSuccess({user: {id: updatedUser.id, changes: updatedUser}}));
   }
   visabilitiPost() {
   const postVisible = document.getElementById('myPost');

@@ -27,29 +27,19 @@ export class UserEffect {
     )
   );
   
-  /* loadUser$ = createEffect(() => this.actions$.pipe(
-        ofType(userActions.loadUser),
-        switchMap(( action) =>
-            this.userService.getUserById(action.payload).pipe(
-            map(user => userActions.loadUserSuccess({ user })),
-            catchError(error => of(error))
-            )
-        )
-    )
-    );
    
-/*     updateUser$ = createEffect(() =>
+  /*  updateUser$ = createEffect(() =>
   this.actions$.pipe(
     ofType(userActions.updateUser),
     switchMap(action =>
       this.userService.updateUser(action.user).pipe(
-        map(user => userActions.updateUserSuccess({ ,
-            changes: userActions.updateUser })),
+        map((user: User) => userActions.updateUserSuccess({user: updateUser.id})),
+
         catchError(error => of(error))
       )
     )
   )
-);  
+);   */
 
   
 
@@ -57,13 +47,13 @@ export class UserEffect {
         ofType(userActions.deleteUser),
         switchMap(( action) =>
             this.userService.deleteUser(action.id).pipe(
-            map((id: number) => userActions.deleteUserSuccess({id })),
+            map((id: number) => userActions.deleteUserSuccess({id})),
             catchError(error => of(error))
             )
         )
     )
     );
- */
+
 
    /*  @Effect()
     loadUsers$: Observable<Action> = this.actions$.pipe(

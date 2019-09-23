@@ -6,7 +6,7 @@ import { User } from '../model/user.model';
 
 export const loadUsers = createAction('[Users] Load Users');
 
-export const loadUsersSuccess = createAction('[Users] Load Success', props<{ users: User[] }>());
+export const loadUsersSuccess = createAction('[Users] Load Users Success', props<{ users: User[] }>());
 
 export const loadUsersFail = createAction('[Users] Load Fail', props<{ errorMessage: string }>());
 
@@ -14,7 +14,9 @@ export const loadUserSuccess = createAction('[User] Load User Success', props<{ 
 
 export const loadUserFail = createAction('[Users] Load User Fail', props<{ errorMessage: string }>());
 
-export const updateUser = createAction('[User/API] Update User', props<{ user: Update<User> }>());
+export const updateUser = createAction('[User] Load User Success', props<{ user: User }>());
+
+export const updateUserSuccess = createAction('[User/API] Update User', props<{ user: Update<User> }>());
 
 export const updateUserFail = createAction('[Users] Update User Fail', props<{ errorMessage: string }>());
 

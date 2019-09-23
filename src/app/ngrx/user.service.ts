@@ -1,6 +1,6 @@
 
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { Observable } from 'rxjs';
 
@@ -10,7 +10,14 @@ import { User } from './model/user.model';
   providedIn: 'root'
 })
 export class UserService {
-  private usersUrl = 'https://jsonplaceholder.typicode.com/users';
+  private usersUrl = 'http://localhost:3000/users';
+
+   headersTodel = new HttpHeaders ({
+    'Content-Type' : 'aplication/json',
+    "Access-Control-Allow-Origin": "*",
+    "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
+
+  });
 
   constructor(private http: HttpClient) { }
 
@@ -18,18 +25,17 @@ export class UserService {
     return this.http.get<User[]>(this.usersUrl);
   }
 
-  getUserById(payload: number): Observable<User> {
-    return this.http.get<User>(`${this.usersUrl}/${payload}`);
+  getUserById(id: number): Observable<User> {
+    return this.http.get<User>(`${this.usersUrl}/${id}`);
   }
 
   updateUser(user: User): Observable<User> {
-    return this.http.patch<User>(
-      `${this.usersUrl}/${user.id}`,
+    return this.http.patch<User>(`${this.usersUrl}/${user.id}`,
       user
     );
   }
 
-  deleteUser(payload: number) {
-    return this.http.delete(`${this.usersUrl}/${payload}`);
+  deleteUser(id: number){
+    return this.http.delete(`${this.usersUrl}/${id}`,)
   }
 }

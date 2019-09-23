@@ -24,8 +24,6 @@ export class UserInfoComponent implements OnInit {
   loading: Observable<Boolean>;
   constructor(
     private store: Store<fromUser.UserState>,
-    private router: Router,
-    private route: ActivatedRoute,
   ) { }
   ngOnInit(): void {
     this.user$ = this.store.select(fromUser.getCurrentUser);

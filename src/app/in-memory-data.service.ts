@@ -1,6 +1,8 @@
 import { InMemoryDbService } from 'angular-in-memory-web-api';
 import { Injectable } from '@angular/core';
 import { User } from './ngrx/model/user.model';
+import { Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -242,8 +244,24 @@ export class InMemoryDataService implements InMemoryDbService {
     ];
     return { users };
   }
-  genId(users: User[]): number {
-    return users.length > 0 ? Math.max(...users.map(user => user.id)) : 1  ;
+  constructor(private http: HttpClient) { }
+
+  getUsers(): Observable<User[]> {
+    return this.http.get<User[]>(this.usersUrl);
   }
-  constructor() { }
+
+  getUserById(id: number): Observable<User> {
+    return this.http.get<User>(`${this.usersUrl}/${id}`);
+  }
+
+  updateUser(user: User): Observable<User> {
+    return this.http.patch<User>(
+      `${this.usersUrl}/${user.id}`,
+      user
+    );
+  }
+
+  deleteUser(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.usersUrl}/${id}`);
+  }
 }

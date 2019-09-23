@@ -6,6 +6,7 @@ import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
 import { User } from '../model/user.model';
 import * as fromRoot from '../../state/app-state';
 
+
 export interface UserState extends EntityState<User> {
     selectedUserId: number | null;
     loading: boolean;
@@ -21,7 +22,6 @@ export interface AppState extends fromRoot.AppState {
 export const userAdapter = createEntityAdapter< User>();
 
 export const initialState: UserState = userAdapter.getInitialState({
-    // additional entity state properties
     selectedUserId: null,
     loading: null,
     loaded: null,
@@ -43,73 +43,13 @@ export const userReducer = createReducer(
   on(userActions.deleteUserSuccess, (state, { id }) => {
         return userAdapter.removeOne(id, state);
       }),
-  on(userActions.updateUser, (state, { user }) => {
+  on(userActions.updateUserSuccess, (state, { user }) => {
         return userAdapter.updateOne(user, state);
     }),
 )
 export function reducer(state: UserState | undefined, action: Action) {
     return userReducer(state, action);
 }
-/* export function userReducer(
-    state = initialState,
-    action: userActions.Action
-): UserState {
-    switch (action.type) {
-        case userActions.UserActionTypes.LOAD_USERS_SUCCESS: {
-            return userAdapter.addAll(action.payload, {
-                ...state,
-                loading: false,
-                loaded: true
-            });
-        }
-        case userActions.UserActionTypes.LOAD_USERS_FAIL: {
-            return {
-                ...state,
-                entities: {},
-                loading: false,
-                loaded: false,
-                error: action.payload
-            };
-        }
-
-        case userActions.UserActionTypes.LOAD_USER_SUCCESS: {
-            return userAdapter.addOne(action.payload, {
-                ...state,
-                selectedUserId: action.payload.id
-            });
-        }
-        case userActions.UserActionTypes.LOAD_USER_FAIL: {
-            return {
-                ...state,
-                error: action.payload
-            };
-        }
-
-        case userActions.UserActionTypes.UPDATE_USER_SUCCESS: {
-            return userAdapter.updateOne(action.payload, state);
-        }
-        case userActions.UserActionTypes.UPDATE_USER_FAIL: {
-            return {
-                ...state,
-                error: action.payload
-            };
-        }
-
-        case userActions.UserActionTypes.DELETE_USER_SUCCESS: {
-            return userAdapter.removeOne(action.payload, state);
-        }
-        case userActions.UserActionTypes.DELETE_USER_FAIL: {
-            return {
-                ...state,
-                error: action.payload
-            };
-        }
-
-        default: {
-            return state;
-        }
-    }
-} */
 
 const getUserFeatureState = createFeatureSelector<UserState>(
     'users'

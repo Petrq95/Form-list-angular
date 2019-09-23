@@ -8,6 +8,7 @@ const MaterialComponents = [
   MatInputModule,
   MatFormFieldModule,
   MatProgressSpinnerModule
+  
 ];
 @NgModule({
   imports: [MaterialComponents],

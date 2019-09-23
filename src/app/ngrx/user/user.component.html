@@ -5,7 +5,7 @@
   <mat-list>
     <mat-list-item [class.selected]="user === selectedUser"  (click)="onSelect(user)" class="user" (click)=hideSpinner() (click)=visabilitiPost() (click)=editUser(user)  *ngFor="let user of (users$ |async)">
         <a class="user-name">{{user.name}}</a>
-      <div class="remove-button" (click)=deleteUser(user)>
+      <div class="remove-button" (click)="deleteUser(user)">
         <button mat-icon-button >
           <mat-icon>delete</mat-icon>
         </button>

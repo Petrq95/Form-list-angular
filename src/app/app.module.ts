@@ -21,6 +21,7 @@ import {
 import { CustomSerializer } from './shared/utils';
 
 import { HttpClientModule } from '@angular/common/http';
+import { SimpleComponent } from './simple/simple.component';
 
 
 
@@ -30,6 +31,7 @@ import { HttpClientModule } from '@angular/common/http';
     MainComponent,
     ListComponent,
     FormComponent,
+    SimpleComponent,
 
   ],
   imports: [
