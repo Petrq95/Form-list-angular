@@ -10,7 +10,7 @@ import { User } from './model/user.model';
   providedIn: 'root'
 })
 export class UserService {
-  private usersUrl = 'http://localhost:3000/users';
+  private usersUrl = 'https://jsonplaceholder.typicode.com/users';
 
    headersTodel = new HttpHeaders ({
     'Content-Type' : 'aplication/json',

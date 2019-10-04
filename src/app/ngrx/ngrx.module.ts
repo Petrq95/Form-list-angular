@@ -15,6 +15,7 @@ import { UserComponent } from './user/user.component';
 import { MaterialModule } from '../material/material.module';
 import { PostComponent } from './post/post.component';
 import { UserInfoComponent } from './user-info/user-info.component';
+import { PostsTableComponent } from './posts.table/posts.table.component';
 
 
 
@@ -25,11 +26,12 @@ const routes: Routes = [
   { path: '', component: UserComponent },
   { path: '', component: PostComponent},
   { path: 'info/:name', component: UserInfoComponent },
+  { path: 'table', component: PostsTableComponent},
 
 
 ];
 @NgModule({
-  declarations: [UserComponent, NgrxComponent, PostComponent, UserInfoComponent, ],
+  declarations: [UserComponent, NgrxComponent, PostComponent, UserInfoComponent, PostsTableComponent, ],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
